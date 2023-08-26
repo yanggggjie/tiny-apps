@@ -4,14 +4,19 @@ import { useState } from 'react'
 import Title from './Title.tsx'
 interface Props {}
 
-function Component({}: Props) {
+function Component() {
   const imageObject = import.meta.glob('./assets/*.jpg', { eager: true })
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   function handleClick(clickedIndex: number) {
     setSelectedIndex(clickedIndex)
   }
   return (
-    <div className={clsx('flex flex-row h-full', 'gap-3')}>
+    <div
+      className={clsx(
+        'w-screen h-screen overflow-hidden',
+        'flex flex-row gap-3',
+      )}
+    >
       {Object.values(imageObject).map((image, index) => {
         return (
           <div
@@ -26,7 +31,7 @@ function Component({}: Props) {
             }}
           >
             <img
-              className={clsx('object-cover w-full h-full')}
+              className={clsx('object-cover w-full h-full overflow-hidden')}
               src={(image as any).default}
               alt=""
             />
